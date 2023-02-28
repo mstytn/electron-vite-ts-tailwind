@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  @apply dark:bg-slate-800 dark:text-white text-black bg-white;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    @apply bg-slate-800 text-white;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    @apply text-black bg-white;
+  }
+}
+
+.btn {
+  @apply py-2 px-4;
+}
+
+.btn-success {
+  @apply bg-green-600 rounded-md hover:bg-green-700 transition-colors text-white;
+}
+
+.btn-success-outline {
+  @apply border-green-600 border-[1px] rounded-md transition-colors dark:text-white hover:bg-green-600 text-green-600 hover:text-white;
+}

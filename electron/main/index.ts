@@ -1,4 +1,4 @@
-import { app, BrowserWindow, shell, ipcMain } from 'electron'
+import { app, BrowserWindow, shell, ipcMain, nativeTheme } from 'electron'
 import { release } from 'node:os'
 import { join } from 'node:path'
 import { addProtocols } from './protocols'
@@ -76,7 +76,10 @@ app.whenReady().then(() => {
     console.log(args)
     e.reply('test','This is my response to test')
   })
-  
+  ipcMain.on('theme', (_ev, args) => {
+    const requestedTheme = (args as string[])[0] === 'dark'
+    nativeTheme.themeSource = requestedTheme ? 'dark' : 'light'
+  })
   createWindow()
 
   if (win) win.menuBarVisible = false

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { Channels } from 'electron/types/types'
+import { toggleTheme } from '../Utilities/theme'
 
 async function sendMessage(channel: Channels,args: any[]) {
   return new Promise((res, rej) => {
@@ -9,9 +10,6 @@ async function sendMessage(channel: Channels,args: any[]) {
     })
   })
 }
-if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-  console.log('dark')
-} else { 'light' }
 
 function App() {
   const [message, setMessage] = useState('')
@@ -21,9 +19,10 @@ function App() {
   }, [])
   return (
     <div>
-      <div className='w-screen h-screen flex flex-col items-center justify-center dark:bg-slate-800 dark:text-white'>
+      <div className='w-screen h-screen flex flex-col items-center justify-center'>
         <h1 className='text-lg'>Welcome to Electron dude...</h1>
         <p>{message}</p>
+        <button className='btn mt-2 btn-success-outline' onClick={() => toggleTheme()}>Change Theme</button>
       </div>
     </div>
   )

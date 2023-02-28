@@ -1,4 +1,4 @@
-export type Channels = 'test'
+export type Channels = 'test' | 'theme'
 export type ElectronHandler = {
   ipcRenderer: {
     sendMessage(channel: Channels, args: unknown[]): void
