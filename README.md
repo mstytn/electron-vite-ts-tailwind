@@ -23,7 +23,6 @@ npm create electron-vite
 
   ```json
   "scripts": {
-    ...
     "watch": "nodemon --watch electron -e ts --delay 1 --exec vite"
   },
   ```
@@ -31,6 +30,7 @@ npm create electron-vite
 - `npm run watch` command runs nodemon to watch electron ts files.
 - Old behavior also exists with `npm run dev`
 - Deleted preloader page in `/electron/preload/index.ts`
+- 28.02.2023 - dev branch - React Router Dom 6 added
 
 ## About React State
 

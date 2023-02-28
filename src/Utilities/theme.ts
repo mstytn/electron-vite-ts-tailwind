@@ -26,4 +26,13 @@ const firstRun = () => {
   setIsDark(getIsDark())
 }
 
-export { toggleTheme, setIsDark, firstRun }
+const firstTimeThemeSet = () => {
+  const themeSetter = (e: Event) => {
+    firstRun()
+    window.removeEventListener('DOMContentLoaded', themeSetter)
+  }
+  
+  window.addEventListener('DOMContentLoaded', themeSetter)
+}
+
+export { toggleTheme, setIsDark, firstTimeThemeSet }

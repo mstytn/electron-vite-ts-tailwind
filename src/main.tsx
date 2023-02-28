@@ -1,18 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from 'Components/App'
 import './index.css'
-import { firstRun } from './Utilities/theme'
+import { firstTimeThemeSet } from './Utilities/theme'
+import Router from './router/router'
 
-const themeSetter = (e: Event) => {
-  firstRun()
-  window.removeEventListener('DOMContentLoaded', themeSetter)
-}
-
-window.addEventListener('DOMContentLoaded', themeSetter)
+firstTimeThemeSet()
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <App />
+    <Router />
   </React.StrictMode>,
 )
