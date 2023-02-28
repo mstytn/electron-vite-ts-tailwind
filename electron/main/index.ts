@@ -1,6 +1,7 @@
 import { app, BrowserWindow, shell, ipcMain, nativeTheme } from 'electron'
 import { release } from 'node:os'
 import { join } from 'node:path'
+import { getConfig, resetConfig, setConfig } from '../settings/electron-settings'
 import { addProtocols } from './protocols'
 
 // The built directory structure
@@ -30,13 +31,10 @@ if (!app.requestSingleInstanceLock()) {
   process.exit(0)
 }
 
-// Remove electron security warnings
-// This warning only shows in development mode
-// Read more on https://www.electronjs.org/docs/latest/tutorial/security
-// process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
+// SECTION: Configuration Load
+const config = getConfig()
 
 let win: BrowserWindow | null = null
-// Here, you can also use other preload
 const preload = join(__dirname, '../preload/index.js')
 const url = process.env.VITE_DEV_SERVER_URL
 const indexHtml = join(process.env.DIST, 'index.html')
@@ -45,8 +43,10 @@ async function createWindow() {
   win = new BrowserWindow({
     title: 'Main window',
     icon: join(process.env.PUBLIC, 'favicon.ico'),
-    width: 1920,
-    height: 1080,
+    width: config.width,
+    height: config.height,
+    x: config.x,
+    y: config.y,
     webPreferences: {
       preload,
       webSecurity: true,
@@ -82,10 +82,24 @@ app.whenReady().then(() => {
   })
   createWindow()
 
-  if (win) win.menuBarVisible = false
+  if (win) { 
+    win.menuBarVisible = false
+    // SECTION: Configuration update on resize or move
+    win.on('resized', function() {
+      const [width, height] = win!.getSize()!
+      const [x, y] = win!.getPosition()!
+      setConfig({ width, height, x, y })
+    } )
+    win.on('moved', function() {
+      const [width, height] = win!.getSize()!
+      const [x, y] = win!.getPosition()!
+      setConfig({ width, height, x, y })
+    })
+  }
 })
 
 app.on('window-all-closed', () => {
+  
   win = null
   if (process.platform !== 'darwin') app.quit()
 })
