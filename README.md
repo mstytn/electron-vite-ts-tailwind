@@ -1,4 +1,4 @@
-# Electron Vite With React TypeScript, tailwind CSS, Inter-Process Communication, Dark-Light Theme Support
+# Electron Vite With React TypeScript, Router-Dom 6, tailwind CSS, Inter-Process Communication, Dark-Light Theme Support
 
 ![GitHub license](https://img.shields.io/github/license/caoxiemeihao/vite-react-electron)
 [![Required Node.JS >= 14.18.0 || >=16.0.0](https://img.shields.io/static/v1?label=node&message=14.18.0%20||%20%3E=16.0.0&logo=node.js&color=3f893e)](https://nodejs.org/about/releases)
@@ -31,6 +31,7 @@ npm create electron-vite
 - Old behavior also exists with `npm run dev`
 - Deleted preloader page in `/electron/preload/index.ts`
 - 28.02.2023 - dev branch - React Router Dom 6 added
+- 28.02.2023 - dev branch - Electron settings added to make app remember it's position and size
 
 ## About React State
 
